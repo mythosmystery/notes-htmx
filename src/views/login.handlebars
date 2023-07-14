@@ -1,0 +1,30 @@
+<div id='login-page'>
+
+  <div
+    class='text-3xl mt-6 mb-12 text-center font-bold py-2 bg-gradient-to-br from-blue-400 to-pink-400 text-transparent bg-clip-text'
+  >Login</div>
+
+  <form
+    hx-post='/api/login'
+    hx-target='#error'
+    class='flex flex-col gap-3 items-center'
+  >
+    <input
+      class='p-2 border-slate-400 rounded-md mt-2 border-2'
+      type='text'
+      name='email'
+      placeholder='email'
+    />
+    <input
+      class='p-2 border-slate-400 rounded-md mt-2 border-2'
+      type='password'
+      name='password'
+      placeholder='password'
+    />
+    <button
+      class='py-3 mt-3 px-6 bg-gradient-to-tr shadow-md ease-in hover:shadow-lg hover:scale-110 active:scale-90 active:shadow-sm transition-all duration-300 text-slate-200 from-blue-400 to-pink-400 rounded-full'
+      type='submit'
+    >Login</button>
+    <div id='error' class='text-red-500 text-sm font-bold'></div>
+  </form>
+</div>
