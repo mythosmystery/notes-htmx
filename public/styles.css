@@ -528,8 +528,32 @@ video {
   position: static;
 }
 
+.fixed{
+  position: fixed;
+}
+
+.top-0{
+  top: 0px;
+}
+
+.-mt-16{
+  margin-top: -4rem;
+}
+
+.mb-1{
+  margin-bottom: 0.25rem;
+}
+
 .mb-12{
   margin-bottom: 3rem;
+}
+
+.mb-8{
+  margin-bottom: 2rem;
+}
+
+.mt-16{
+  margin-top: 4rem;
 }
 
 .mt-2{
@@ -556,8 +580,16 @@ video {
   margin-top: 1.5rem;
 }
 
+.mt-8{
+  margin-top: 2rem;
+}
+
 .flex{
   display: flex;
+}
+
+.h-full{
+  height: 100%;
 }
 
 .h-screen{
@@ -570,6 +602,10 @@ video {
 
 .w-2\/3{
   width: 66.666667%;
+}
+
+.w-full{
+  width: 100%;
 }
 
 .flex-col{
@@ -592,10 +628,6 @@ video {
   gap: 0.75rem;
 }
 
-.gap-4{
-  gap: 1rem;
-}
-
 .gap-8{
   gap: 2rem;
 }
@@ -608,17 +640,17 @@ video {
   border-radius: 0.375rem;
 }
 
-.border{
-  border-width: 1px;
-}
-
 .border-2{
   border-width: 2px;
 }
 
-.border-gray-300{
+.border-l{
+  border-left-width: 1px;
+}
+
+.border-slate-100{
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  border-color: rgb(241 245 249 / var(--tw-border-opacity));
 }
 
 .border-slate-400{
@@ -626,9 +658,19 @@ video {
   border-color: rgb(148 163 184 / var(--tw-border-opacity));
 }
 
-.bg-purple-400{
+.bg-blue-400{
   --tw-bg-opacity: 1;
-  background-color: rgb(192 132 252 / var(--tw-bg-opacity));
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
+.bg-green-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-br{
@@ -656,6 +698,11 @@ video {
 
 .p-2{
   padding: 0.5rem;
+}
+
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .px-4{
@@ -765,6 +812,11 @@ video {
   color: rgb(100 116 139 / var(--tw-text-opacity));
 }
 
+.text-slate-700{
+  --tw-text-opacity: 1;
+  color: rgb(51 65 85 / var(--tw-text-opacity));
+}
+
 .text-transparent{
   color: transparent;
 }
@@ -806,6 +858,14 @@ video {
 
 .hover\:cursor-pointer:hover{
   cursor: pointer;
+}
+
+.hover\:bg-purple-400\/50:hover{
+  background-color: rgb(192 132 252 / 0.5);
+}
+
+.hover\:bg-slate-100\/50:hover{
+  background-color: rgb(241 245 249 / 0.5);
 }
 
 .hover\:text-purple-400:hover{
