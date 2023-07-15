@@ -7,7 +7,10 @@ export const requireAuth = (
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.session.user) return res.redirect('/login')
+  if (!req.session.user) {
+    res.setHeader('HX-Redirect', '/login')
+    return res.send()
+  }
 
-  next()
+  return next()
 }
