@@ -18,20 +18,25 @@ auth.post('/login', async (req: ReqBody<LoginProps>, res) => {
   if (!email || !password)
     return res.send('Please provide an email and password')
 
-  const user = await prisma.user.findUnique({ where: { email } })
+  try {
+    const user = await prisma.user.findUnique({ where: { email } })
 
-  if (!user)
-    return res.send(
-      'No account found, <a href="/register" class="text-blue-500 hover:text-purple-500">Register</a>',
-    )
+    if (!user)
+      return res.send(
+        'No account found, <a href="/register" class="text-blue-500 hover:text-purple-500">Register</a>',
+      )
 
-  if (!bcrypt.compareSync(password, user.hash))
+    if (!bcrypt.compareSync(password, user.hash))
+      return res.send('Invalid email or password')
+
+    req.session.user = user
+
+    res.setHeader('HX-Redirect', '/notes')
+    return res.send('')
+  } catch (err) {
+    console.log(err)
     return res.send('Invalid email or password')
-
-  req.session.user = user
-
-  res.setHeader('HX-Redirect', '/notes')
-  return res.send('')
+  }
 })
 
 type RegisterProps = LoginProps & { name: string }
