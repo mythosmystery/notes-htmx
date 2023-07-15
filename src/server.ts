@@ -1,3 +1,4 @@
+import "module-alias/register"
 import express from "express"
 import "dotenv/config"
 import { logger } from "./middleware"

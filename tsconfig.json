@@ -21,8 +21,11 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "jsx": "react",
-    "jsxFactory": "elements.createElement"
+    "jsxFactory": "elements.createElement",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts"]
+  "include": ["./src/**/*.ts", "src/**/*.tsx"]
 }

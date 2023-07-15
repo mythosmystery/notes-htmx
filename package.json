@@ -2,13 +2,13 @@
   "name": "notes-htmx",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "build": "tsc",
     "start:dev": "pnpm tailwind && pnpm build && pnpm start",
-    "dev": "nodemon --exec pnpm start:dev --watch src --ext ts,html,handlebars,css",
-    "tailwind": "tailwindcss -i ./src/input.css -o ./public/styles.css"
+    "dev": "nodemon --exec pnpm start:dev --watch src --ext ts,html,css,tsx",
+    "tailwind": "tailwindcss -i ./src/styles/global.css -o ./public/styles.css"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +24,7 @@
     "express-session": "^1.17.3",
     "ioredis": "^5.3.2",
     "jsonwebtoken": "^9.0.1",
-    "lighterhtml": "^4.2.0"
+    "module-alias": "^2.2.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -43,5 +43,8 @@
     "tailwindcss": "^3.3.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }

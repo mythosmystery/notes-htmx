@@ -1,4 +1,4 @@
-import { html } from "../../lib/html"
+import { html } from "@/lib/html"
 
 export function Layout(body: string) {
   return html`
