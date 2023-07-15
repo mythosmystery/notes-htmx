@@ -1,4 +1,5 @@
 import 'module-alias/register'
+import 'reflect-metadata'
 import express from 'express'
 import 'dotenv/config'
 import { logger } from './middleware'
@@ -11,6 +12,7 @@ import session from 'express-session'
 import RedisStore from 'connect-redis'
 import { client } from './lib/redis'
 import { SECRET } from './constants'
+import { AppDataSource } from './lib/datasource'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -41,6 +43,8 @@ app.use(logger)
 app.use('/', views)
 app.use('/api', api)
 
-app.listen(+PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`)
+AppDataSource.initialize().then(() => {
+  app.listen(+PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`)
+  })
 })

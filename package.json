@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "postinstall": "prisma generate",
     "start:dev": "pnpm tailwind && pnpm build && pnpm start",
     "dev": "nodemon --exec pnpm start:dev --watch src --ext ts,html,css,tsx",
     "tailwind": "tailwindcss -i ./src/styles/global.css -o ./public/styles.css"
@@ -15,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.0.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
@@ -25,7 +23,10 @@
     "express-session": "^1.17.3",
     "ioredis": "^5.3.2",
     "jsonwebtoken": "^9.0.1",
-    "module-alias": "^2.2.3"
+    "module-alias": "^2.2.3",
+    "pg": "^8.11.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -40,7 +41,6 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "prisma": "^5.0.0",
     "tailwindcss": "^3.3.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"

@@ -1,9 +1,9 @@
 import { api } from '.'
 import { ReqBody } from '@/types'
 import bcrypt from 'bcrypt'
-import { prisma } from '@/lib/prisma'
 import express from 'express'
 import { SECRET } from '@/constants'
+import { User } from '../../models/User'
 
 export const auth = express.Router()
 
@@ -19,7 +19,12 @@ auth.post('/login', async (req: ReqBody<LoginProps>, res) => {
     return res.send('Please provide an email and password')
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } })
+    const user = await User.findOne({
+      where: { email },
+      relations: { notes: true },
+    })
+
+    console.log(user)
 
     if (!user)
       return res.send(
@@ -49,13 +54,20 @@ auth.post('/register', async (req: ReqBody<RegisterProps>, res) => {
     return res.send('Please provide an email and password')
 
   try {
-    const user = await prisma.user.create({
-      data: {
-        email,
-        name,
-        hash: hashedPassword,
-      },
+    const newUser = User.create({
+      email,
+      name,
+      hash: hashedPassword,
+      notes: [
+        {
+          title: 'Welcome to your first note!',
+          slug: 'welcome-to-your-first-note',
+          content: 'This is your first note, feel free to delete it.',
+        },
+      ],
     })
+
+    const user = await newUser.save()
 
     req.session.user = user
 
