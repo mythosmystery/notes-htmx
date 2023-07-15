@@ -43,7 +43,7 @@ type RegisterProps = LoginProps & { name: string }
 
 auth.post('/register', async (req: ReqBody<RegisterProps>, res) => {
   const { email, password, name } = req.body
-  const hashedPassword = await bcrypt.hash(password, SECRET)
+  const hashedPassword = await bcrypt.hash(password, 10)
 
   if (!email || !password)
     return res.send('Please provide an email and password')
