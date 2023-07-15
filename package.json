@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
+    "postinstall": "prisma generate",
     "start:dev": "pnpm tailwind && pnpm build && pnpm start",
     "dev": "nodemon --exec pnpm start:dev --watch src --ext ts,html,css,tsx",
     "tailwind": "tailwindcss -i ./src/styles/global.css -o ./public/styles.css"
