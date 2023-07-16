@@ -7,7 +7,7 @@ import { NoteItem } from './components/noteItem'
 export const Notes = (user: User) => {
   // TODO: make a better component syntax
   return html`
-    ${Header(true)}
+    ${Header(user)}
 
     <div class="mt-20 flex h-screen gap-8 overflow-x-clip px-6 py-4">
       <div class="w-1/3">
