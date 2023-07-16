@@ -12,11 +12,11 @@ marked.use(
       return hljs.highlight(code, { language }).value
     },
   }),
+  { gfm: true, mangle: false, headerIds: false },
 )
 
 export const NotePreview = (note: Note, editMode: boolean) => {
   const markdown = marked.parse(note.content.trimStart().trimEnd())
-  console.log(markdown)
   return html`
     ${editMode
       ? html`
@@ -115,7 +115,7 @@ const styles = html`
       color: #f02ffa;
     }
     .markdown-container pre {
-      background-color: #282c34;
+      background-color: #1a1b26;
       border-radius: 0.5rem;
       padding: 0.75rem;
     }

@@ -27,6 +27,7 @@
     "marked": "^5.1.1",
     "marked-highlight": "^2.0.1",
     "module-alias": "^2.2.3",
+    "node-cache": "^5.1.2",
     "pg": "^8.11.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.17"

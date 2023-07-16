@@ -4,12 +4,26 @@ import { Note } from '@/models/Note'
 export const NoteItem = (note: Note) => {
   return html`
     <li
-      class="flex flex-col gap-2 border-l border-slate-100 p-2 hover:cursor-pointer hover:bg-slate-100/50"
+      class="mt-2 flex flex-col gap-2 border-l border-slate-100 p-2 hover:cursor-pointer hover:bg-slate-100/50"
       hx-get="/api/notes/${note.id}"
       hx-target="#notePreview"
     >
-      <h2 class="truncate text-2xl font-thin text-purple-400">${note.title}</h2>
-      <p class="truncate pr-6 text-lg font-thin text-gray-400">
+      <div class="flex justify-between">
+        <h2 class="truncate text-2xl font-thin text-purple-500">
+          ${note.title}
+        </h2>
+        <button
+          class="rounded-full p-2 font-bold text-red-400 transition-all hover:scale-110 hover:text-red-500 active:scale-90"
+          hx-delete="/api/notes/${note.id}"
+          hx-target="#notes"
+        >
+          <iconify-icon
+            icon="majesticons:trash"
+            class="text-2xl"
+          ></iconify-icon>
+        </button>
+      </div>
+      <p class="truncate pr-6 text-lg font-thin text-gray-600">
         ${note.content}
       </p>
     </li>

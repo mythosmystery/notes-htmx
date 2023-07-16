@@ -11,9 +11,21 @@ export const Notes = (user: User) => {
 
     <div class="mt-20 flex h-screen gap-8 overflow-x-clip px-6 py-4">
       <div class="w-1/3">
-        <h1 class="text-4xl font-thin text-purple-400">Notes</h1>
+        <div class="flex items-center justify-between">
+          <h1 class="text-4xl font-thin text-purple-400">Notes</h1>
+          <button
+            class="rounded-full bg-blue-400 p-2 font-bold text-white transition-all hover:scale-110 hover:bg-purple-400/50 active:scale-90"
+            hx-post="/api/notes/new"
+            hx-target="#notes"
+          >
+            <iconify-icon
+              icon="majesticons:plus"
+              class="text-2xl"
+            ></iconify-icon>
+          </button>
+        </div>
         <ul id="notes" class="mt-4">
-          ${user.notes.map(NoteItem)}
+          ${user.notes.map(NoteItem).join('')}
         </ul>
       </div>
       <div class="w-2/3" id="notePreview">
