@@ -5,7 +5,7 @@ import { NotePreview } from '../../views/components/notePreview'
 import { User } from '../../models/User'
 import { NoteItem } from '../../views/components/noteItem'
 import { cache, invalidate } from '../../lib/redis'
-import { getUser } from '../../lib/cached'
+import { getNote, getUser } from '../../lib/cached'
 
 export const note = express.Router()
 
@@ -37,7 +37,7 @@ note.get('/notes/:id', async (req, res) => {
   const noteId = req.params.id
   const editMode = req.query.edit === 'true'
 
-  const note = await Note.findOne({ where: { id: +noteId } })
+  const note = await getNote(+noteId)
 
   if (!note) return res.send(NotePreview(req.session.user?.notes[0]!, editMode))
 
@@ -52,6 +52,7 @@ note.post('/notes/save/:id', async (req, res) => {
     if (!affected) return res.send(makeNotesError(req))
 
     await getUser.invalidate(req.session.user?.id!)
+    getNote.invalidate(+noteId)
 
     const user = await getUser(req.session.user?.id!)
 

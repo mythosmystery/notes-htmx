@@ -616,6 +616,10 @@ video {
   height: 100vh;
 }
 
+.max-h-24{
+  max-height: 6rem;
+}
+
 .w-1\/3{
   width: 33.333333%;
 }

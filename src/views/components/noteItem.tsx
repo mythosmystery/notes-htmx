@@ -4,7 +4,7 @@ import { Note } from '@/models/Note'
 export const NoteItem = (note: Note) => {
   return html`
     <li
-      class="mt-2 flex flex-col gap-2 border-l border-slate-100 p-2 hover:cursor-pointer hover:bg-slate-100/50"
+      class="mt-2 flex max-h-24 flex-col gap-2 border-l border-slate-100 p-2 hover:cursor-pointer hover:bg-slate-100/50"
       hx-get="/api/notes/${note.id}"
       hx-target="#notePreview"
     >
