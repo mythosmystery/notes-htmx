@@ -1,4 +1,4 @@
-import express, { Request } from 'express'
+import express, { Request, Response } from 'express'
 import { Note } from '../../models/Note'
 import { html } from '../../lib/html'
 import { NotePreview } from '../../views/components/notePreview'
@@ -22,7 +22,7 @@ note.post('/notes/new', async (req, res) => {
 
     const user = await getUser(req.session.user?.id!)
 
-    if (!user) return res.send(makeNotesError(req))
+    if (!user) return makeNotesError(req, res)
 
     req.session.user = user
 
@@ -31,7 +31,7 @@ note.post('/notes/new', async (req, res) => {
     return res.send(makeNotes(user.notes))
   } catch (e) {
     console.log(e)
-    return res.send(makeNotesError(req))
+    return makeNotesError(req, res)
   }
 })
 
@@ -51,14 +51,14 @@ note.post('/notes/save/:id', async (req, res) => {
   try {
     const { affected } = await Note.update({ id: +noteId }, { ...req.body })
 
-    if (!affected) return res.send(makeNotesError(req))
+    if (!affected) return makeNotesError(req, res)
 
     await getUser.invalidate(req.session.user?.id!)
     getNote.invalidate(+noteId)
 
     const user = await getUser(req.session.user?.id!)
 
-    if (!user) return res.send(makeNotesError(req))
+    if (!user) return makeNotesError(req, res)
 
     req.session.user = user
 
@@ -67,7 +67,7 @@ note.post('/notes/save/:id', async (req, res) => {
     return res.send(makeNotes(user.notes))
   } catch (e) {
     console.log(e)
-    return res.send(makeNotesError(req))
+    return makeNotesError(req, res)
   }
 })
 
@@ -80,7 +80,7 @@ note.delete('/notes/:id', async (req, res) => {
 
     const user = await getUser(req.session.user?.id!)
 
-    if (!user) return res.send(makeNotesError(req))
+    if (!user) return makeNotesError(req, res)
 
     req.session.user = user
 
@@ -92,13 +92,16 @@ note.delete('/notes/:id', async (req, res) => {
     return res.send(makeNotes(user.notes))
   } catch (e) {
     console.log(e)
-    return res.send(makeNotesError(req))
+    return makeNotesError(req, res)
   }
 })
 
 const makeNotes = (notes: Note[]) => html`${notes.map(NoteItem).join('')}`
 
-const makeNotesError = (req: Request, msg?: string) => html`
-  ${makeNotes(req.session.user?.notes || [])}
-  <div class="text-xl text-red-500">${msg || 'Error saving note'}</div>
-`
+const makeNotesError = (req: Request, res: Response, msg?: string) => {
+  res.setHeader(
+    'HX-Trigger',
+    JSON.stringify({ toastError: msg || 'An error occurred' }),
+  )
+  res.send(html`${makeNotes(req.session.user?.notes || [])}`)
+}

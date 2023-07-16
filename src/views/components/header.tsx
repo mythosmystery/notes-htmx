@@ -4,7 +4,9 @@ import { User } from '@/models/User'
 export const Header = (user: User) => {
   const loggedIn = !!user
   return html`
-    <nav class="fixed top-0 flex w-full justify-between bg-white px-6 py-4">
+    <nav
+      class="fixed top-0 flex w-full justify-between bg-white px-6 py-4 dark:bg-slate-900"
+    >
       <a class="text-2xl font-thin text-blue-400 hover:text-purple-400" href="/"
         >Home</a
       >

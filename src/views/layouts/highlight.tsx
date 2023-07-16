@@ -19,14 +19,16 @@ export function Layout(body: string) {
           href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
         />
       </head>
-      <body>
+      <body class="dark:bg-slate-900">
         ${body}
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script>
           const notyf = new Notyf()
           htmx.on('toastSuccess', (e) => {
-            console.log(e.detail)
             notyf.success(e.detail.value)
+          })
+          htmx.on('toastError', (e) => {
+            notyf.error(e.detail.value)
           })
         </script>
       </body>

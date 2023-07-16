@@ -48,13 +48,13 @@ export const NotePreview = (note: Note, editMode: boolean) => {
               <input
                 type="text"
                 name="title"
-                class="mb-8 w-full text-center text-2xl text-purple-400 focus:outline-none"
+                class="mb-8 w-full text-center text-2xl text-purple-400 focus:outline-none dark:bg-slate-900"
                 value="${note.title}"
               />
               <textarea
                 name="content"
                 wrap="hard"
-                class="w-full grow text-slate-700 focus:outline-none"
+                class="w-full grow text-slate-700 focus:outline-none dark:bg-slate-900 dark:text-white"
               >
                 ${note.content}
               </textarea
@@ -69,7 +69,9 @@ export const NotePreview = (note: Note, editMode: boolean) => {
             hx-get="/api/notes/${note.id}?edit=true"
           >
             <div class="mb-8 text-2xl text-purple-400">${note.title}</div>
-            <div class="w-full grow text-slate-700 focus:outline-none">
+            <div
+              class="w-full grow text-slate-700 focus:outline-none dark:text-white"
+            >
               <div class="markdown-container">${markdown}</div>
             </div>
             <img
