@@ -26,6 +26,8 @@ note.post('/notes/new', async (req, res) => {
 
     req.session.user = user
 
+    res.setHeader('HX-Trigger', JSON.stringify({ toastSuccess: 'Note saved' }))
+
     return res.send(makeNotes(user.notes))
   } catch (e) {
     console.log(e)
@@ -60,6 +62,8 @@ note.post('/notes/save/:id', async (req, res) => {
 
     req.session.user = user
 
+    res.setHeader('HX-Trigger', JSON.stringify({ toastSuccess: 'Note saved' }))
+
     return res.send(makeNotes(user.notes))
   } catch (e) {
     console.log(e)
@@ -79,6 +83,11 @@ note.delete('/notes/:id', async (req, res) => {
     if (!user) return res.send(makeNotesError(req))
 
     req.session.user = user
+
+    res.setHeader(
+      'HX-Trigger',
+      JSON.stringify({ toastSuccess: 'Note deleted' }),
+    )
 
     return res.send(makeNotes(user.notes))
   } catch (e) {

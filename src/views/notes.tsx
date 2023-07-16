@@ -14,7 +14,7 @@ export const Notes = (user: User) => {
         <div class="flex items-center justify-between">
           <h1 class="text-4xl font-thin text-purple-400">Notes</h1>
           <button
-            class="rounded-full bg-blue-400 p-2 font-bold text-white transition-all hover:scale-110 hover:bg-purple-400/50 active:scale-90"
+            class="font-bol rounded-full p-2 text-blue-400 transition-all hover:scale-110 hover:bg-slate-200/50 hover:text-purple-400 active:scale-90"
             hx-post="/api/notes/new"
             hx-target="#notes"
           >

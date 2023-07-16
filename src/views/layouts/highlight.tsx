@@ -14,9 +14,21 @@ export function Layout(body: string) {
         />
         <script src="https://unpkg.com/htmx.org@1.9.2"></script>
         <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
       </head>
       <body>
         ${body}
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <script>
+          const notyf = new Notyf()
+          htmx.on('toastSuccess', (e) => {
+            console.log(e.detail)
+            notyf.success(e.detail.value)
+          })
+        </script>
       </body>
     </html>
   `

@@ -11,7 +11,7 @@ export function Layout(body: string) {
         <script src="https://unpkg.com/htmx.org@1.9.2"></script>
         <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
       </head>
-      <body>
+      <body class="dark:bg-slate-900">
         ${body}
       </body>
     </html>

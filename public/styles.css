@@ -922,6 +922,10 @@ video {
   background-color: rgb(241 245 249 / 0.5);
 }
 
+.hover\:bg-slate-200\/50:hover{
+  background-color: rgb(226 232 240 / 0.5);
+}
+
 .hover\:text-purple-400:hover{
   --tw-text-opacity: 1;
   color: rgb(192 132 252 / var(--tw-text-opacity));
@@ -974,4 +978,11 @@ video {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (prefers-color-scheme: dark){
+  .dark\:bg-slate-900{
+    --tw-bg-opacity: 1;
+    background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+  }
 }
