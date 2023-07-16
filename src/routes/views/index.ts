@@ -1,4 +1,5 @@
 import express from 'express'
+import crypto from 'crypto'
 import { requireAuth } from '@/middleware/auth'
 import { r } from '@/lib/html'
 import { Home } from '@/views/home'
