@@ -8,20 +8,28 @@ export const NoteItem = (note: Note) => {
       hx-get="/api/notes/${note.id}"
       hx-target="#notePreview"
     >
-      <div class="flex justify-between">
+      <div class="flex items-center justify-between">
         <h2 class="truncate text-2xl font-thin text-purple-500">
           ${note.title}
         </h2>
-        <button
-          class="rounded-full p-2 font-bold text-red-400 transition-all hover:scale-110 hover:text-red-500 active:scale-90"
-          hx-delete="/api/notes/${note.id}"
-          hx-target="#notes"
-        >
-          <iconify-icon
-            icon="majesticons:trash"
-            class="text-2xl"
-          ></iconify-icon>
-        </button>
+        <div>
+          <a href="/notes/${note.id}/${note.slug}">
+            <iconify-icon
+              icon="majesticons:external-link"
+              class="text-2xl text-purple-500 transition-all hover:scale-110 hover:text-blue-400 active:scale-90"
+            ></iconify-icon>
+          </a>
+          <button
+            class="rounded-full p-2 font-bold text-red-400 transition-all hover:scale-110 hover:text-red-500 active:scale-90"
+            hx-delete="/api/notes/${note.id}"
+            hx-target="#notes"
+          >
+            <iconify-icon
+              icon="majesticons:trash"
+              class="text-2xl"
+            ></iconify-icon>
+          </button>
+        </div>
       </div>
       <p class="truncate pr-6 text-lg font-thin text-gray-600 dark:text-white">
         ${note.content}

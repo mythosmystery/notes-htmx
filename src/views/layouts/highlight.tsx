@@ -7,7 +7,7 @@ export function Layout(body: string) {
       <head>
         <meta charset="utf-8" />
         <title>Typenotes</title>
-        <link href="styles.css" rel="stylesheet" />
+        <link href="/styles.css" rel="stylesheet" />
         <link
           rel="stylesheet"
           href="//unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/tokyo-night-dark.min.css"

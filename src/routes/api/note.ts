@@ -18,9 +18,9 @@ note.post('/notes/new', async (req, res) => {
       user: { id: req.session.user?.id },
     }).save()
 
-    await getUser.invalidate(req.session.user?.id!)
+    await getUser.invalidate(req.session.user?.id)
 
-    const user = await getUser(req.session.user?.id!)
+    const user = await getUser(req.session.user?.id)
 
     if (!user) return makeNotesError(req, res)
 
@@ -49,14 +49,17 @@ note.get('/notes/:id', async (req, res) => {
 note.post('/notes/save/:id', async (req, res) => {
   const noteId = req.params.id
   try {
-    const { affected } = await Note.update({ id: +noteId }, { ...req.body })
+    const { affected } = await Note.update(
+      { id: +noteId },
+      { ...req.body, slug: req.body.title.toLowerCase().replace(/\s/g, '-') },
+    )
 
     if (!affected) return makeNotesError(req, res)
 
-    await getUser.invalidate(req.session.user?.id!)
+    await getUser.invalidate(req.session.user?.id)
     getNote.invalidate(+noteId)
 
-    const user = await getUser(req.session.user?.id!)
+    const user = await getUser(req.session.user?.id)
 
     if (!user) return makeNotesError(req, res)
 
@@ -76,9 +79,9 @@ note.delete('/notes/:id', async (req, res) => {
   try {
     await Note.delete({ id: +noteId })
 
-    await getUser.invalidate(req.session.user?.id!)
+    await getUser.invalidate(req.session.user?.id)
 
-    const user = await getUser(req.session.user?.id!)
+    const user = await getUser(req.session.user?.id)
 
     if (!user) return makeNotesError(req, res)
 

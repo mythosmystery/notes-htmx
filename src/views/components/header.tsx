@@ -1,7 +1,7 @@
 import { html } from '@/lib/html'
 import { User } from '@/models/User'
 
-export const Header = (user: User) => {
+export const Header = (user?: User | null) => {
   const loggedIn = !!user
   return html`
     <nav

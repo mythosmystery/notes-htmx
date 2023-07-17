@@ -2,7 +2,9 @@ import { Note } from '../models/Note'
 import { User } from '../models/User'
 import { cache } from './redis'
 
-export const getUser = cache(async (userId: number) => {
+export const getUser = cache(async (userId?: number) => {
+  if (!userId) return null
+
   const user = await User.findOne({
     where: { id: userId },
     relations: { notes: true },
@@ -13,7 +15,9 @@ export const getUser = cache(async (userId: number) => {
   return user
 })
 
-export const getNote = cache(async (noteId: number) => {
+export const getNote = cache(async (noteId?: number) => {
+  if (!noteId) return null
+
   const note = await Note.findOne({
     where: { id: noteId },
   })

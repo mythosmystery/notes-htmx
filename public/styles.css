@@ -741,6 +741,11 @@ video {
   padding: 0.5rem;
 }
 
+.px-24{
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -924,6 +929,11 @@ video {
 
 .hover\:bg-slate-200\/50:hover{
   background-color: rgb(226 232 240 / 0.5);
+}
+
+.hover\:text-blue-400:hover{
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
 }
 
 .hover\:text-purple-400:hover{

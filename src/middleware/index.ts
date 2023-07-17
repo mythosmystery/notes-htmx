@@ -7,6 +7,7 @@ export const logger = (req: Request, res: Response, next: NextFunction) => {
     ip: req.headers['x-forwarded-for'] || req.ip,
     payload: { ...req.body, ...req.params, ...req.query },
     timestamp: Date.now(),
+    session: req.session,
   })
   next()
 }
