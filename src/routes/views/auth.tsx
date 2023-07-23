@@ -7,17 +7,9 @@ import { Layout } from '@/layouts/main'
 export const auth = express.Router()
 
 auth.get('/login', (_, res) => {
-  res.send(
-    <Layout>
-      <Login />
-    </Layout>,
-  )
+  res.send(<Login />)
 })
 
 auth.get('/register', (_, res) => {
-  res.send(
-    <Layout>
-      <Register />
-    </Layout>,
-  )
+  res.send(<Register />)
 })

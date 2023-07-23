@@ -103,8 +103,13 @@ note.delete('/notes/:id', async (req, res) => {
   }
 })
 
-const makeNotes = (notes: Note[]) =>
-  notes.map((note) => <NoteItem note={note} />)
+const makeNotes = (notes: Note[]) => (
+  <div>
+    {notes.map((note) => (
+      <NoteItem note={note} />
+    ))}
+  </div>
+)
 
 const makeNotesError = (req: Request, res: Response, msg?: string) => {
   res.setHeader(

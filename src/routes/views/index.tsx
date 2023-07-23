@@ -12,11 +12,7 @@ import { NotePage } from '@/pages/note'
 export const views = express.Router()
 
 views.get('/', (_, res) => {
-  res.send(
-    <MainLayout>
-      <Home />
-    </MainLayout>,
-  )
+  res.send(<Home />)
 })
 
 views.get('/notes', requireAuth, async (req, res) => {
@@ -26,11 +22,7 @@ views.get('/notes', requireAuth, async (req, res) => {
     return res.redirect('/login')
   }
 
-  res.send(
-    <Layout>
-      <Notes user={user} />
-    </Layout>,
-  )
+  res.send(<Notes user={user} />)
 })
 
 views.get('/notes/:id/:slug', async (req, res) => {
@@ -39,11 +31,7 @@ views.get('/notes/:id/:slug', async (req, res) => {
   if (!note) return res.redirect('/')
 
   const user = await getUser(req.session.user?.id)
-  return res.send(
-    <Layout>
-      <NotePage note={note} user={user} />
-    </Layout>,
-  )
+  return res.send(<NotePage note={note} user={user} />)
 })
 
 views.use('/', auth)
