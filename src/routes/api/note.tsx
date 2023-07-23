@@ -1,9 +1,10 @@
+import * as elements from 'typed-html'
 import express, { Request, Response } from 'express'
 import { Note } from '../../models/Note'
 import { html } from '../../lib/html'
-import { NotePreview } from '../../views/components/notePreview'
+import { NotePreview } from '../../components/notePreview'
 import { User } from '../../models/User'
-import { NoteItem } from '../../views/components/noteItem'
+import { NoteItem } from '../../components/noteItem'
 import { cache, invalidate } from '../../lib/redis'
 import { getNote, getUser } from '../../lib/cached'
 
@@ -41,9 +42,12 @@ note.get('/notes/:id', async (req, res) => {
 
   const note = await getNote(+noteId)
 
-  if (!note) return res.send(NotePreview(req.session.user?.notes[0]!, editMode))
+  if (!note)
+    return res.send(
+      <NotePreview note={req.session.user?.notes[0]!} editMode={false} />,
+    )
 
-  return res.send(NotePreview(note, editMode))
+  return res.send(<NotePreview note={note} editMode={editMode} />)
 })
 
 note.post('/notes/save/:id', async (req, res) => {
@@ -99,12 +103,13 @@ note.delete('/notes/:id', async (req, res) => {
   }
 })
 
-const makeNotes = (notes: Note[]) => html`${notes.map(NoteItem).join('')}`
+const makeNotes = (notes: Note[]) =>
+  notes.map((note) => <NoteItem note={note} />)
 
 const makeNotesError = (req: Request, res: Response, msg?: string) => {
   res.setHeader(
     'HX-Trigger',
     JSON.stringify({ toastError: msg || 'An error occurred' }),
   )
-  res.send(html`${makeNotes(req.session.user?.notes || [])}`)
+  res.send(makeNotes(req.session.user?.notes || []))
 }

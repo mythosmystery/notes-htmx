@@ -1,7 +1,8 @@
 import { html } from '@/lib/html'
-import { Header } from '@/views/components/header'
+import { Header } from '@/components/header'
+import { Children } from 'typed-html'
 
-export function Layout(body: string) {
+export function Layout({ children }: Children) {
   return html`
     <html>
       <head>
@@ -20,7 +21,7 @@ export function Layout(body: string) {
         />
       </head>
       <body class="dark:bg-slate-900">
-        ${body}
+        ${children}
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script>
           const notyf = new Notyf()

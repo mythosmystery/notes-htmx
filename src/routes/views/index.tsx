@@ -1,19 +1,22 @@
+import * as elements from 'typed-html'
 import express from 'express'
-import crypto from 'crypto'
 import { requireAuth } from '@/middleware/auth'
-import { r } from '@/lib/html'
-import { Home } from '@/views/home'
-import { Notes } from '@/views/notes'
+import { Home } from '@/pages/home'
+import { Notes } from '@/pages/notes'
 import { auth } from './auth'
-import { Layout } from '@/views/layouts/highlight'
-import { User } from '@/models/User'
-import { getNote, getUser } from '../../lib/cached'
-import { NotePage } from '../../views/note'
+import { Layout } from '@/layouts/highlight'
+import { Layout as MainLayout } from '@/layouts/main'
+import { getNote, getUser } from '@/lib/cached'
+import { NotePage } from '@/pages/note'
 
 export const views = express.Router()
 
 views.get('/', (_, res) => {
-  r(res, Home())
+  res.send(
+    <MainLayout>
+      <Home />
+    </MainLayout>,
+  )
 })
 
 views.get('/notes', requireAuth, async (req, res) => {
@@ -23,7 +26,11 @@ views.get('/notes', requireAuth, async (req, res) => {
     return res.redirect('/login')
   }
 
-  res.send(Layout(Notes(user)))
+  res.send(
+    <Layout>
+      <Notes user={user} />
+    </Layout>,
+  )
 })
 
 views.get('/notes/:id/:slug', async (req, res) => {
@@ -32,7 +39,11 @@ views.get('/notes/:id/:slug', async (req, res) => {
   if (!note) return res.redirect('/')
 
   const user = await getUser(req.session.user?.id)
-  return res.send(Layout(NotePage(note, user)))
+  return res.send(
+    <Layout>
+      <NotePage note={note} user={user} />
+    </Layout>,
+  )
 })
 
 views.use('/', auth)

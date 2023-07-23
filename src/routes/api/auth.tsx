@@ -3,7 +3,8 @@ import { ReqBody } from '@/types'
 import bcrypt from 'bcrypt'
 import express from 'express'
 import { SECRET } from '@/constants'
-import { User } from '../../models/User'
+import { User } from '@/models/User'
+import { html } from '@/lib/html'
 
 export const auth = express.Router()
 
@@ -28,7 +29,10 @@ auth.post('/login', async (req: ReqBody<LoginProps>, res) => {
 
     if (!user)
       return res.send(
-        'No account found, <a href="/register" class="text-blue-500 hover:text-purple-500">Register</a>',
+        html`No account found,
+          <a href="/register" class="text-blue-500 hover:text-purple-500"
+            >Register</a
+          >`,
       )
 
     if (!bcrypt.compareSync(password, user.hash))
@@ -76,7 +80,8 @@ auth.post('/register', async (req: ReqBody<RegisterProps>, res) => {
   } catch (err) {
     console.log(err)
     return res.send(
-      'Account already exists <a href="/login" class="text-blue-500 hover:text-purple-500">Login</a>',
+      html`Account already exists
+        <a href="/login" class="text-blue-500 hover:text-purple-500">Login</a>`,
     )
   }
 })
