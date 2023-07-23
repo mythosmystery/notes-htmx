@@ -620,6 +620,10 @@ video {
   max-height: 6rem;
 }
 
+.w-1\/2{
+  width: 50%;
+}
+
 .w-1\/3{
   width: 33.333333%;
 }
