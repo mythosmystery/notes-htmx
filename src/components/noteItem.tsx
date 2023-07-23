@@ -6,7 +6,7 @@ export const NoteItem = ({ note }: { note: Note }) => {
   return (
     <li
       class="mt-2 flex max-h-24 flex-col gap-2 border-l border-slate-100 p-2 hover:cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-700"
-      hx-get="/api/notes/${note.id}"
+      hx-get={`/api/notes/${note.id}`}
       hx-target="#notePreview"
     >
       <div class="flex items-center justify-between">
@@ -14,7 +14,7 @@ export const NoteItem = ({ note }: { note: Note }) => {
           {note.title}
         </h2>
         <div>
-          <a href="/notes/${note.id}/${note.slug}">
+          <a href={`/notes/${note.id}/${note.slug}`}>
             {html`<iconify-icon
               icon="majesticons:external-link"
               class="text-2xl text-purple-500 transition-all hover:scale-110 hover:text-blue-400 active:scale-90"
@@ -22,7 +22,7 @@ export const NoteItem = ({ note }: { note: Note }) => {
           </a>
           <button
             class="rounded-full p-2 font-bold text-red-400 transition-all hover:scale-110 hover:text-red-500 active:scale-90"
-            hx-delete="/api/notes/${note.id}"
+            hx-delete={`/api/notes/${note.id}`}
             hx-target="#notes"
           >
             {html`<iconify-icon

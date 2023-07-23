@@ -15,7 +15,7 @@ export const NotePreview = ({
   return (
     <div>
       {editMode ? (
-        <form hx-post="/api/notes/save/${note.id}" hx-target="#notes">
+        <form hx-post={`/api/notes/save/${note.id}`} hx-target="#notes">
           <div class="-mt-16 flex items-center justify-between">
             <button class="mb-1 mt-8 rounded-full bg-blue-400 p-2 font-bold text-white transition-all hover:scale-110 hover:bg-purple-400/50 active:scale-90">
               {html`<iconify-icon
@@ -25,7 +25,7 @@ export const NotePreview = ({
             </button>
             <button
               class="mb-1 mt-8 rounded-full bg-blue-400 p-2 font-bold text-white transition-all hover:scale-110 hover:bg-purple-400/50 active:scale-90"
-              hx-get="/api/notes/${note.id}"
+              hx-get={`/api/notes/${note.id}`}
               hx-target="#notePreview"
             >
               {html`<iconify-icon
@@ -42,7 +42,7 @@ export const NotePreview = ({
               type="text"
               name="title"
               class="mb-8 w-full text-center text-2xl text-purple-400 focus:outline-none dark:bg-slate-900"
-              value="${note.title}"
+              value={note.title}
             />
             <textarea
               name="content"
@@ -57,7 +57,7 @@ export const NotePreview = ({
         <div
           class="mr-6 flex h-full flex-col items-center"
           hx-target="#notePreview"
-          hx-get="/api/notes/${note.id}?edit=true"
+          hx-get={`/api/notes/${note.id}?edit=true`}
         >
           <div class="mb-8 text-2xl text-purple-400">{note.title}</div>
           <div class="w-full grow text-slate-700 focus:outline-none dark:text-white">
