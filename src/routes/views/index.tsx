@@ -8,6 +8,8 @@ import { Layout } from '@/layouts/highlight'
 import { Layout as MainLayout } from '@/layouts/main'
 import { getNote, getUser } from '@/lib/cached'
 import { NotePage } from '@/pages/note'
+import { Client } from '../../client/layout'
+import { Counter } from '../../client/counter'
 
 export const views = express.Router()
 
@@ -32,6 +34,14 @@ views.get('/notes/:id/:slug', async (req, res) => {
 
   const user = await getUser(req.session.user?.id)
   return res.send(<NotePage note={note} user={user} />)
+})
+
+views.get('/counter', (_, res) => {
+  res.send(
+    <Client>
+      <Counter />
+    </Client>,
+  )
 })
 
 views.use('/', auth)
